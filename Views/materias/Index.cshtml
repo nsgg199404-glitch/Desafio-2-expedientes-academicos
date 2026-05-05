@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ExpedientesAcademicos.Models.materia>
+﻿@model IEnumerable<ExpedientesAcademicos.Models.Materia>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Lista Materias</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -31,9 +31,9 @@
                 @Html.DisplayFor(modelItem => item.Docente)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.materiaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.materiaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.materiaId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.MateriaId">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.MateriaId">Ver</a> |
+                <a asp-action="Delete" asp-route-id="@item.MateriaId">Eliminar</a>
             </td>
         </tr>
 }

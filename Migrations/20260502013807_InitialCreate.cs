@@ -38,11 +38,11 @@ namespace ExpedientesAcademicos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_materias", x => x.materiaId);
+                    table.PrimaryKey("PK_Materias", x => x.materiaId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "expedientes",
+                name: "Expedientes",
                 columns: table => new
                 {
                     expedienteId = table.Column<int>(type: "int", nullable: false)
@@ -64,8 +64,8 @@ namespace ExpedientesAcademicos.Migrations
                     table.ForeignKey(
                         name: "FK_expedientes_materias_materiaId",
                         column: x => x.materiaId,
-                        principalTable: "materias",
-                        principalColumn: "materiaId",
+                        principalTable: "Materias",
+                        principalColumn: "MateriaId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -77,7 +77,7 @@ namespace ExpedientesAcademicos.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_expedientes_materiaId",
                 table: "expedientes",
-                column: "materiaId");
+                column: "MateriaId");
         }
 
         /// <inheritdoc />
@@ -90,7 +90,7 @@ namespace ExpedientesAcademicos.Migrations
                 name: "alumnos");
 
             migrationBuilder.DropTable(
-                name: "materias");
+                name: "Materias");
         }
     }
 }

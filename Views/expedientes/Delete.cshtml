@@ -1,12 +1,12 @@
 ﻿@model ExpedientesAcademicos.Models.expediente
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Eliminar";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Estas segura que quieres eliminar?</h3>
 <div>
     <h4>expediente</h4>
     <hr />
@@ -37,9 +37,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Eliminar">
         <input type="hidden" asp-for="expedienteId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar a lista</a>
     </form>
 </div>

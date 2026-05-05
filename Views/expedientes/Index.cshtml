@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ExpedientesAcademicos.Models.expediente>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista de Expedientes";
 }
 
-<h1>Index</h1>
+<h1>Lista de Expediente</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Crear">Crear Nuevo</a>
 </p>
 <table class="table">
     <thead>
@@ -31,10 +31,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Alumno.Apellido)
+                    @item.Alumno.Nombre @item.Alumno.Apellido
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.materia.Docente)
+                @Html.DisplayFor(modelItem => item.materia.NombreMateria)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NotaFinal)
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Observaciones)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.expedienteId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.expedienteId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.expedienteId">Delete</a>
+                <a asp-action="Editar" asp-route-id="@item.expedienteId">Editar</a> |
+                <a asp-action="Ver" asp-route-id="@item.expedienteId">Ver</a> |
+                <a asp-action="Eliminar" asp-route-id="@item.expedienteId">Eliminar</a>
             </td>
         </tr>
 }

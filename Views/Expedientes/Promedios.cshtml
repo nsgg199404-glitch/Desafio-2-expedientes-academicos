@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ExpedientesAcademicos.Models.ViewModels.PromedioAlumnoViewModel>
+
+<h1>Promedio de notas por Alumno</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Alumno</th>
+            <th>Promedio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.NombreCompleto</td>
+                <td>@item.Promedio.ToString("0.00")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-controller="Expedientes" asp-action="Index">Volver a Expedientes</a>
+<canvas id="graficoPromedios" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var nombres = [];
+    var promedios = [];
+
+    @foreach (var item in Model)
+    {
+        <text>
+            nombres.push("@item.NombreCompleto");
+            promedios.push(@item.Promedio);
+        </text>
+    }
+
+    var ctx = document.getElementById('graficoPromedios').getContext('2d');
+
+    new Chart(ctx, {
+    type: 'bar',
+    data: {
+    labels: nombres,
+    datasets: [{
+    label: 'Promedio de Notas',
+    data: promedios
+    }]
+    }
+    });
+</script>

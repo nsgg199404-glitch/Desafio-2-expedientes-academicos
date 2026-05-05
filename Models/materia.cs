@@ -2,9 +2,9 @@
 
 namespace ExpedientesAcademicos.Models
 {
-    public class materia
+    public class Materia
     {
-        public int materiaId { get; set; }
+        public int MateriaId { get; set; }
 
         [Required]
         public string NombreMateria { get; set; }

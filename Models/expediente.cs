@@ -12,7 +12,7 @@ namespace ExpedientesAcademicos.Models
         public Alumno? Alumno { get; set; }
 
         public int materiaId { get; set; }
-        public materia? materia { get; set; }
+        public Materia? materia { get; set; }
 
         [Range(0,10)]
         public decimal NotaFinal { get; set; }

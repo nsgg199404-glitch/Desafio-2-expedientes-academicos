@@ -34,7 +34,7 @@ namespace ExpedientesAcademicos.Controllers
             }
 
             var materia = await _context.materias
-                .FirstOrDefaultAsync(m => m.materiaId == id);
+                .FirstOrDefaultAsync(m => m.MateriaId == id);
             if (materia == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace ExpedientesAcademicos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("materiaId,NombreMateria,Docente")] materia materia)
+        public async Task<IActionResult> Create([Bind("materiaId,NombreMateria,Docente")] Materia materia)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace ExpedientesAcademicos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("materiaId,NombreMateria,Docente")] materia materia)
+        public async Task<IActionResult> Edit(int id, [Bind("materiaId,NombreMateria,Docente")] Materia materia)
         {
-            if (id != materia.materiaId)
+            if (id != materia.MateriaId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace ExpedientesAcademicos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!materiaExists(materia.materiaId))
+                    if (!materiaExists(materia.MateriaId))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace ExpedientesAcademicos.Controllers
             }
 
             var materia = await _context.materias
-                .FirstOrDefaultAsync(m => m.materiaId == id);
+                .FirstOrDefaultAsync(m => m.MateriaId == id);
             if (materia == null)
             {
                 return NotFound();
@@ -151,7 +151,7 @@ namespace ExpedientesAcademicos.Controllers
 
         private bool materiaExists(int id)
         {
-            return _context.materias.Any(e => e.materiaId == id);
+            return _context.materias.Any(e => e.MateriaId == id);
         }
     }
 }

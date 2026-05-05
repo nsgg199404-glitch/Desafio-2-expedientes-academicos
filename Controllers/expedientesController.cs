@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExpedientesAcademicos.Data;
 using ExpedientesAcademicos.Models;
+using ExpedientesAcademicos.Models.ViewModels;
 
 namespace ExpedientesAcademicos.Controllers
 {
@@ -166,5 +167,31 @@ namespace ExpedientesAcademicos.Controllers
         {
             return _context.expedientes.Any(e => e.expedienteId == id);
         }
+
+        public async Task<IActionResult> Promedios()
+        {
+            var promedios = await _context.expedientes
+                .Include(e => e.Alumno)
+                .GroupBy(e => new { e.alumnoId, e.Alumno.Nombre, e.Alumno.Apellido })
+                .Select(g => new PromedioAlumnoViewModel
+                {
+                    alumnoId = g.Key.alumnoId,
+                    NombreCompleto = g.Key.Nombre + " " + g.Key.Apellido,
+                    Promedio = g.Average(e => e.NotaFinal)
+                })
+                .ToListAsync();
+
+            return View(promedios);
+        }
+
     }
 }
+    
+
+
+
+
+
+
+
+
