@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,56 +9,47 @@ using ExpedientesAcademicos.Models.ViewModels;
 
 namespace ExpedientesAcademicos.Controllers
 {
-    public class expedientesController : Controller
+    public class ExpedientesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public expedientesController(ApplicationDbContext context)
+        public ExpedientesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: expedientes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.expedientes.Include(e => e.Alumno).Include(e => e.materia);
-            return View(await applicationDbContext.ToListAsync());
+            var expedientes = _context.expedientes
+                .Include(e => e.Alumno)
+                .Include(e => e.Materia);
+
+            return View(await expedientes.ToListAsync());
         }
 
-        // GET: expedientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var expediente = await _context.expedientes
                 .Include(e => e.Alumno)
-                .Include(e => e.materia)
-                .FirstOrDefaultAsync(m => m.expedienteId == id);
-            if (expediente == null)
-            {
-                return NotFound();
-            }
+                .Include(e => e.Materia)
+                .FirstOrDefaultAsync(m => m.ExpedienteId == id);
+
+            if (expediente == null) return NotFound();
 
             return View(expediente);
         }
 
-        // GET: expedientes/Create
         public IActionResult Create()
         {
-            ViewData["alumnoId"] = new SelectList(_context.alumnos, "AlumnoId", "Apellido");
-            ViewData["materiaId"] = new SelectList(_context.materias, "materiaId", "Docente");
+            CargarListas();
             return View();
         }
 
-        // POST: expedientes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("expedienteId,alumnoId,materiaId,NotaFinal,Observaciones")] expediente expediente)
+        public async Task<IActionResult> Create([Bind("ExpedienteId,AlumnoId,MateriaId,NotaFinal,Observaciones")] Expediente expediente)
         {
             if (ModelState.IsValid)
             {
@@ -68,40 +57,28 @@ namespace ExpedientesAcademicos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["alumnoId"] = new SelectList(_context.alumnos, "AlumnoId", "Apellido", expediente.alumnoId);
-            ViewData["materiaId"] = new SelectList(_context.materias, "materiaId", "Docente", expediente.materiaId);
+
+            CargarListas(expediente.AlumnoId, expediente.MateriaId);
             return View(expediente);
         }
 
-        // GET: expedientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var expediente = await _context.expedientes.FindAsync(id);
-            if (expediente == null)
-            {
-                return NotFound();
-            }
-            ViewData["alumnoId"] = new SelectList(_context.alumnos, "AlumnoId", "Apellido", expediente.alumnoId);
-            ViewData["materiaId"] = new SelectList(_context.materias, "materiaId", "Docente", expediente.materiaId);
+
+            if (expediente == null) return NotFound();
+
+            CargarListas(expediente.AlumnoId, expediente.MateriaId);
             return View(expediente);
         }
 
-        // POST: expedientes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("expedienteId,alumnoId,materiaId,NotaFinal,Observaciones")] expediente expediente)
+        public async Task<IActionResult> Edit(int id, [Bind("ExpedienteId,AlumnoId,MateriaId,NotaFinal,Observaciones")] Expediente expediente)
         {
-            if (id != expediente.expedienteId)
-            {
-                return NotFound();
-            }
+            if (id != expediente.ExpedienteId) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -112,70 +89,56 @@ namespace ExpedientesAcademicos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!expedienteExists(expediente.expedienteId))
-                    {
+                    if (!ExpedienteExists(expediente.ExpedienteId))
                         return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+
+                    throw;
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["alumnoId"] = new SelectList(_context.alumnos, "AlumnoId", "Apellido", expediente.alumnoId);
-            ViewData["materiaId"] = new SelectList(_context.materias, "materiaId", "Docente", expediente.materiaId);
+
+            CargarListas(expediente.AlumnoId, expediente.MateriaId);
             return View(expediente);
         }
 
-        // GET: expedientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var expediente = await _context.expedientes
                 .Include(e => e.Alumno)
-                .Include(e => e.materia)
-                .FirstOrDefaultAsync(m => m.expedienteId == id);
-            if (expediente == null)
-            {
-                return NotFound();
-            }
+                .Include(e => e.Materia)
+                .FirstOrDefaultAsync(m => m.ExpedienteId == id);
+
+            if (expediente == null) return NotFound();
 
             return View(expediente);
         }
 
-        // POST: expedientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var expediente = await _context.expedientes.FindAsync(id);
+
             if (expediente != null)
             {
                 _context.expedientes.Remove(expediente);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool expedienteExists(int id)
-        {
-            return _context.expedientes.Any(e => e.expedienteId == id);
         }
 
         public async Task<IActionResult> Promedios()
         {
             var promedios = await _context.expedientes
                 .Include(e => e.Alumno)
-                .GroupBy(e => new { e.alumnoId, e.Alumno.Nombre, e.Alumno.Apellido })
+                .GroupBy(e => new { e.AlumnoId, e.Alumno.Nombre, e.Alumno.Apellido })
                 .Select(g => new PromedioAlumnoViewModel
                 {
-                    alumnoId = g.Key.alumnoId,
+                    alumnoId = g.Key.AlumnoId,
                     NombreCompleto = g.Key.Nombre + " " + g.Key.Apellido,
                     Promedio = g.Average(e => e.NotaFinal)
                 })
@@ -184,9 +147,34 @@ namespace ExpedientesAcademicos.Controllers
             return View(promedios);
         }
 
+        private bool ExpedienteExists(int id)
+        {
+            return _context.expedientes.Any(e => e.ExpedienteId == id);
+        }
+
+        private void CargarListas(int? alumnoId = null, int? materiaId = null)
+        {
+            ViewData["AlumnoId"] = new SelectList(
+                _context.alumnos.Select(a => new
+                {
+                    a.AlumnoId,
+                    NombreCompleto = a.Nombre + " " + a.Apellido
+                }),
+                "AlumnoId",
+                "NombreCompleto",
+                alumnoId
+            );
+
+            ViewData["MateriaId"] = new SelectList(
+                _context.materias,
+                "MateriaId",
+                "NombreMateria",
+                materiaId
+            );
+        }
     }
 }
-    
+
 
 
 

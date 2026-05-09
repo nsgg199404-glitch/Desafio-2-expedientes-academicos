@@ -10,11 +10,11 @@ using ExpedientesAcademicos.Models;
 
 namespace ExpedientesAcademicos.Controllers
 {
-    public class materiasController : Controller
+    public class MateriasController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public materiasController(ApplicationDbContext context)
+        public MateriasController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace ExpedientesAcademicos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("materiaId,NombreMateria,Docente")] Materia materia)
+        public async Task<IActionResult> Create([Bind("MateriaId,NombreMateria,Docente")] Materia materia)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace ExpedientesAcademicos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("materiaId,NombreMateria,Docente")] Materia materia)
+        public async Task<IActionResult> Edit(int id, [Bind("MateriaId,NombreMateria,Docente")] Materia materia)
         {
             if (id != materia.MateriaId)
             {

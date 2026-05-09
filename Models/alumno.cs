@@ -18,6 +18,6 @@ namespace ExpedientesAcademicos.Models
         [Required]
         public string Grado { get; set; }
 
-        public ICollection<expediente>? Expedientes { get; set; }
+        public ICollection<Expediente>? Expedientes { get; set; }
     }
 }

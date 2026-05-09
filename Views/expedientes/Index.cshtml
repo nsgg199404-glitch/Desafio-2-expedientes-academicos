@@ -1,53 +1,42 @@
-﻿@model IEnumerable<ExpedientesAcademicos.Models.expediente>
-
-@{
-    ViewData["Title"] = "Lista de Expedientes";
-}
-
-<h1>Lista de Expediente</h1>
+﻿<h1 class="mb-4">Lista de Expedientes</h1>
 
 <p>
-    <a asp-action="Crear">Crear Nuevo</a>
+    <a asp-action="Create" class="btn btn-success">Crear nuevo expediente</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Alumno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.materia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NotaFinal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Observaciones)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                    @item.Alumno.Nombre @item.Alumno.Apellido
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.materia.NombreMateria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NotaFinal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Observaciones)
-            </td>
-            <td>
-                <a asp-action="Editar" asp-route-id="@item.expedienteId">Editar</a> |
-                <a asp-action="Ver" asp-route-id="@item.expedienteId">Ver</a> |
-                <a asp-action="Eliminar" asp-route-id="@item.expedienteId">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        Expedientes Académicos
+    </div>
+
+    <div class="card-body">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Alumno</th>
+                    <th>Materia</th>
+                    <th>Nota Final</th>
+                    <th>Observaciones</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Alumno.Nombre @item.Alumno.Apellido</td>
+                        <td>@item.Materia.NombreMateria</td>
+                        <td>@item.NotaFinal</td>
+                        <td>@item.Observaciones</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ExpedienteId" class="btn btn-warning btn-sm">Editar</a>
+                            <a asp-action="Details" asp-route-id="@item.ExpedienteId" class="btn btn-info btn-sm">Ver</a>
+                            <a asp-action="Delete" asp-route-id="@item.ExpedienteId" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

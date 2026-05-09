@@ -10,7 +10,7 @@ namespace ExpedientesAcademicos.Data
         }
         public DbSet<Alumno> alumnos { get; set; }
         public DbSet<Materia> materias { get; set; }    
-        public DbSet<expediente> expedientes { get; set; }
+        public DbSet<Expediente> expedientes { get; set; }
 
 
     }

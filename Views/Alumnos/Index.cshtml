@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Grado)
             </td>
             <td>
-                <a asp-action="Editar" asp-route-id="@item.AlumnoId">Editar</a> |
-                <a asp-action="ver" asp-route-id="@item.AlumnoId">Ver</a> |
-                <a asp-action="Eliminar" asp-route-id="@item.AlumnoId">Eliminar</a>
+                    <a asp-action="Edit" asp-route-id="@item.AlumnoId" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.AlumnoId" class="btn btn-info btn-sm">Ver</a>
+                    <a asp-action="Delete" asp-route-id="@item.AlumnoId" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
         </tr>
 }

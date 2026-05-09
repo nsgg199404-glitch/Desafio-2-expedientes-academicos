@@ -7,7 +7,7 @@
 <h1>Lista Materias</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nueva Materia</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,11 @@
                 @Html.DisplayFor(modelItem => item.Docente)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MateriaId">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.MateriaId">Ver</a> |
-                <a asp-action="Delete" asp-route-id="@item.MateriaId">Eliminar</a>
+                    <a asp-controller="Materias" asp-action="Edit" asp-route-id="@item.MateriaId" class="btn btn-warning btn-sm">Editar</a>
+
+                    <a asp-controller="Materias" asp-action="Details" asp-route-id="@item.MateriaId" class="btn btn-info btn-sm">Ver</a>
+
+                    <a asp-controller="Materias" asp-action="Delete" asp-route-id="@item.MateriaId" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
         </tr>
 }

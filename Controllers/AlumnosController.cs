@@ -10,22 +10,22 @@ using ExpedientesAcademicos.Models;
 
 namespace ExpedientesAcademicos.Controllers
 {
-    public class AlumnoesController : Controller
+    public class AlumnosController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public AlumnoesController(ApplicationDbContext context)
+        public AlumnosController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Alumnoes
+        // GET: Alumnos
         public async Task<IActionResult> Index()
         {
             return View(await _context.alumnos.ToListAsync());
         }
 
-        // GET: Alumnoes/Details/5
+        // GET: Alumnos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,13 +43,13 @@ namespace ExpedientesAcademicos.Controllers
             return View(alumno);
         }
 
-        // GET: Alumnoes/Create
+        // GET: Alumnos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Alumnoes/Create
+        // POST: Alumnos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +65,7 @@ namespace ExpedientesAcademicos.Controllers
             return View(alumno);
         }
 
-        // GET: Alumnoes/Edit/5
+        // GET: Alumnos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,7 +81,7 @@ namespace ExpedientesAcademicos.Controllers
             return View(alumno);
         }
 
-        // POST: Alumnoes/Edit/5
+        // POST: Alumnos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +116,7 @@ namespace ExpedientesAcademicos.Controllers
             return View(alumno);
         }
 
-        // GET: Alumnoes/Delete/5
+        // GET: Alumnos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace ExpedientesAcademicos.Controllers
             return View(alumno);
         }
 
-        // POST: Alumnoes/Delete/5
+        // POST: Alumnos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

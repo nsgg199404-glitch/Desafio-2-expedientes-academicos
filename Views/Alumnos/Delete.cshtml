@@ -1,7 +1,7 @@
 ﻿@model ExpedientesAcademicos.Models.Alumno
 
 @{
-    ViewData["Title"] = "Eliminar";
+    ViewData["Title"] = "Delete";
 }
 
 <h1>Elimnar</h1>
@@ -37,7 +37,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Eliminar">
+    <form asp-action="Delete" method="post">
         <input type="hidden" asp-for="AlumnoId" />
         <input type="submit" value="Eliminar " class="btn btn-danger" /> |
         <a asp-action="Index">Regresar a Lista</a>

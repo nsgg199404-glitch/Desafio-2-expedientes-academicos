@@ -2,17 +2,17 @@
 
 namespace ExpedientesAcademicos.Models
 {
-    public class expediente
+    public class Expediente
     {
-      public int expedienteId { get; set; }
+      public int ExpedienteId { get; set; }
 
         [Required]
-        public int alumnoId { get; set; }
+        public int AlumnoId { get; set; }
 
         public Alumno? Alumno { get; set; }
 
-        public int materiaId { get; set; }
-        public Materia? materia { get; set; }
+        public int MateriaId { get; set; }
+        public Materia? Materia { get; set; }
 
         [Range(0,10)]
         public decimal NotaFinal { get; set; }
